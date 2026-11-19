@@ -1,4 +1,5 @@
 pub mod growingpacker;
+pub mod maxrects;
 
 mod helpers {
     // Taken from https://gist.github.com/LPeter1997/f18c78de6cea1810bc755fe39ddfd77d
