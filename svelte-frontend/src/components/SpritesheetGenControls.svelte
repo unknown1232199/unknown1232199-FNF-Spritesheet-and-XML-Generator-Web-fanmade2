@@ -19,6 +19,7 @@
     let imgSettings = {
         padding: 2,
         maxAtlasSize: 0,
+        packerMode: 'maxrects',
         prefixType: 'no-prefix',
         usePrefixOnXMLFrames: false,
         customPrefix: '',
@@ -237,7 +238,7 @@
         genPercent = 0;
         progDlg.showModal();
         const { GrowingPacker } = wasm;
-        const growingpacker = GrowingPacker.new(charname, imgSettings.padding, Number(imgSettings.maxAtlasSize) || 0);
+        const growingpacker = GrowingPacker.new(charname, imgSettings.padding, Number(imgSettings.maxAtlasSize) || 0, imgSettings.packerMode !== 'original');
 
         const n_steps = Array.from($spritesheet_map.entries()).length + $spriteframes.length;
         let curStepNumber = 0;
@@ -413,19 +414,36 @@
 <style>
     #controls {
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        border: 2px solid grey;
-        margin: 2px;
+        grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+        gap: 6px;
+        padding: 8px;
+        margin: 8px 2px 2px;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
         position: sticky;
-        z-index: 5;
-        bottom: 0;
+        z-index: 20;
+        bottom: 6px;
+        background: var(--background);
+        box-shadow: 0 5px 20px #0003;
     }
-
-    @media screen and (max-width: 530px)
-    {
-        #controls {
-            grid-template-columns: repeat(3, 1fr);
-        }
+    #controls > button,
+    #controls :global(.dropup > button) {
+        min-height: 40px;
+        border-radius: 7px;
+        font-weight: 650;
+    }
+    #controls label[for="select-all"] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 6px;
+        border: 1px solid var(--border-color);
+        border-radius: 7px;
+        font-size: .9rem;
+    }
+    @media screen and (max-width: 530px) {
+        #controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     dialog {
