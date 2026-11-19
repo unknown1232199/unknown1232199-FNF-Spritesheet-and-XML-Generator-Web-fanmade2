@@ -18,6 +18,7 @@
 
     let imgSettings = {
         padding: 2,
+        maxAtlasSize: 0,
         prefixType: 'no-prefix',
         usePrefixOnXMLFrames: false,
         customPrefix: '',
@@ -236,7 +237,7 @@
         genPercent = 0;
         progDlg.showModal();
         const { GrowingPacker } = wasm;
-        const growingpacker = GrowingPacker.new(charname, imgSettings.padding);
+        const growingpacker = GrowingPacker.new(charname, imgSettings.padding, Number(imgSettings.maxAtlasSize) || 4096);
 
         const n_steps = Array.from($spritesheet_map.entries()).length + $spriteframes.length;
         let curStepNumber = 0;

@@ -5,6 +5,7 @@
 
     export let settings = {
         padding: 2,
+        maxAtlasSize: 0,
         prefixType: 'no-prefix',
         usePrefixOnXMLFrames: false,
         customPrefix: '',
@@ -29,6 +30,18 @@
                 <input type="checkbox" name="clip-to-bb" id="clip-to-bb" bind:checked={settings.clipToBoundingBox} />
                 Clip to Bounding Box
             </label>
+        </fieldset>
+        <fieldset>
+            <legend>Spritesheet Size</legend>
+            <label for="max-atlas-size">
+                Maximum atlas size
+                <select id="max-atlas-size" bind:value={settings.maxAtlasSize}>
+                    <option value={0}>Auto (up to 4096 × 4096)</option>
+                    <option value={2048}>2048 × 2048 maximum</option>
+                    <option value={4096}>4096 × 4096 maximum</option>
+                </select>
+            </label>
+            <small>The PNG keeps its actual packed dimensions; sprites are never stretched to fill the limit.</small>
         </fieldset>
         <br />
         <fieldset>

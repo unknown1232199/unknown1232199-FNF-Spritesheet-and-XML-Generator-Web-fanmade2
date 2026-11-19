@@ -89,6 +89,7 @@ pub struct GrowingPacker
 {
     character_name: String,
     img_padding: u32,
+    max_atlas_size: u32,
     frame_image_cache: ImageCache,
     frames: HashMap<u64, Vec<FrameInfo>>,
     _spritesheet_store: HashMap<String, image::DynamicImage>,
@@ -98,11 +99,12 @@ pub struct GrowingPacker
 #[wasm_bindgen]
 impl GrowingPacker
 {
-    pub fn new(charname: String, padding: u32) -> Self
+    pub fn new(charname: String, padding: u32, max_atlas_size: u32) -> Self
     {
         Self {
             character_name: charname,
             img_padding: padding,
+            max_atlas_size,
             frame_image_cache: ImageCache::new(),
             frames: HashMap::new(),
             _spritesheet_store: HashMap::new(),
@@ -389,6 +391,12 @@ impl Packer for GrowingPacker
             .map(|fit| fit.y + fit.height)
             .max()
             .unwrap_or(0);
+
+        // Treat the selected atlas size as a hard maximum on either axis.
+        // The output remains tightly cropped; it is not forced to a square canvas.
+        if final_width > self.max_atlas_size || final_height > self.max_atlas_size {
+            return Err(PackError);
+        }
 
         Ok((final_width, final_height, fits))
     }
