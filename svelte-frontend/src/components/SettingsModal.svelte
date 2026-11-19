@@ -89,7 +89,7 @@
 
 <style>
     #modal-content {
-        width: 60vw;
+        width: min(720px, calc(100vw - 64px)); max-width: 100%;
     }
 
     h2 {
