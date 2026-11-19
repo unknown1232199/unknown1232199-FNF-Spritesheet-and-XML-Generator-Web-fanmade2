@@ -4,7 +4,7 @@ body{background:var(--background);color:var(--text-color)}button,input,select{fo
 input[type=text],input[type=number],select{min-width:0;border:1px solid var(--border-color);border-radius:7px;padding:8px 10px;background:var(--background);color:var(--text-color)}input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--frame-hovered);outline-offset:2px}
 dialog{max-width:min(92vw,720px);border:1px solid var(--border-color);border-radius:12px;background:var(--background);color:var(--text-color);box-shadow:0 20px 70px #0008}dialog::backdrop{background:#05060bbd;backdrop-filter:blur(3px)}
 #sprite-frames,#preview-div{border:1px solid var(--border-color)!important;border-radius:10px;background-image:linear-gradient(45deg,#8881 25%,transparent 25%),linear-gradient(-45deg,#8881 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#8881 75%),linear-gradient(-45deg,transparent 75%,#8881 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
-#controls{gap:7px;padding:9px;border:1px solid var(--border-color)!important;border-radius:10px;background:var(--background)}#controls>*{min-width:0}
+#controls{gap:7px;padding:9px;border:1px solid var(--border-color)!important;border-radius:10px;background:var(--background);position:relative;z-index:10} #controls button{position:relative;z-index:1;touch-action:manipulation} .drop-up-menu{z-index:30}#controls>*{min-width:0}
 @media(max-width:650px){#controls{grid-template-columns:repeat(2,minmax(0,1fr))!important;position:static!important}#sprite-frames,#preview-div{height:48vh!important}}
 
 /* Basic mode keeps the workspace spacious; advanced mode favors denser editing. */

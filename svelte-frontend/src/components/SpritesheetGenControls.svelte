@@ -237,7 +237,7 @@
         genPercent = 0;
         progDlg.showModal();
         const { GrowingPacker } = wasm;
-        const growingpacker = GrowingPacker.new(charname, imgSettings.padding, Number(imgSettings.maxAtlasSize) || 4096);
+        const growingpacker = GrowingPacker.new(charname, imgSettings.padding, Number(imgSettings.maxAtlasSize) || 0);
 
         const n_steps = Array.from($spritesheet_map.entries()).length + $spriteframes.length;
         let curStepNumber = 0;

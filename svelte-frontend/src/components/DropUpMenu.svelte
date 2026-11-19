@@ -15,6 +15,12 @@
     const setNewLeft = () => {
         dropupLeft = (dropupButton) ? dropupButton.getBoundingClientRect().left : 0;
     };
+
+    function toggleMenu(event: MouseEvent) {
+        event.stopPropagation();
+        setNewLeft();
+        menuShown = !menuShown;
+    }
     onMount(() => {
         setNewLeft();
         window.addEventListener('resize', setNewLeft);
@@ -28,7 +34,7 @@
     $: menuDiv && (menuDiv.style.transform = `translateX(${dropupLeft-15}px)`);
 
     function onClickHandler(e) {
-        if(menuDiv && e.target !== menuDiv)
+        if(menuDiv && !menuDiv.contains(e.target as Node) && e.target !== dropupButton)
         {
             menuShown = false;
         }
@@ -44,9 +50,9 @@
     }
 </script>
 
-<button bind:this={dropupButton} on:click|self|stopPropagation={() => { menuShown = !menuShown }}>{buttonText}</button>
+<button type="button" bind:this={dropupButton} on:click={toggleMenu} aria-expanded={menuShown}>{buttonText}</button>
 {#if menuShown}
-    <div bind:this={menuDiv} class="drop-up-menu" in:fadeNSlide="{{ duration: 100, easing: quadInOut }}" out:fadeNSlide="{{ duration: 100, easing: quadInOut }}">
+    <div bind:this={menuDiv} class="drop-up-menu" role="menu" in:fadeNSlide="{{ duration: 100, easing: quadInOut }}" out:fadeNSlide="{{ duration: 100, easing: quadInOut }}">
         <slot />
     </div>
 {/if}
@@ -54,6 +60,8 @@
 <style>
     .drop-up-menu {
         position: absolute;
+        z-index: 20;
+        pointer-events: auto;
         display: flex;
         flex-direction: column;
         background-color: var(--secondary-button-emphasized);

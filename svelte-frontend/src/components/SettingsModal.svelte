@@ -36,12 +36,12 @@
             <label for="max-atlas-size">
                 Maximum atlas size
                 <select id="max-atlas-size" bind:value={settings.maxAtlasSize}>
-                    <option value={0}>Auto (up to 4096 × 4096)</option>
+                    <option value={0}>Auto (grow as needed; no fixed limit)</option>
                     <option value={2048}>2048 × 2048 maximum</option>
                     <option value={4096}>4096 × 4096 maximum</option>
                 </select>
             </label>
-            <small>The PNG keeps its actual packed dimensions; sprites are never stretched to fill the limit.</small>
+            <small>Auto grows to fit all frames. 2048 and 4096 apply maximum width and height limits. Sprites are never stretched.</small>
         </fieldset>
         <br />
         <fieldset>

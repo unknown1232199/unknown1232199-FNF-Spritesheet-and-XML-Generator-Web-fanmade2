@@ -394,7 +394,7 @@ impl Packer for GrowingPacker
 
         // Treat the selected atlas size as a hard maximum on either axis.
         // The output remains tightly cropped; it is not forced to a square canvas.
-        if final_width > self.max_atlas_size || final_height > self.max_atlas_size {
+        if self.max_atlas_size > 0 && (final_width > self.max_atlas_size || final_height > self.max_atlas_size) {
             return Err(PackError);
         }
 
