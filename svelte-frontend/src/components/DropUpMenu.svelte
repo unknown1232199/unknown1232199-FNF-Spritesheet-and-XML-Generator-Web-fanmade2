@@ -1,72 +1,53 @@
 <script lang="ts">
-    import { onDestroy, onMount } from "svelte";
-    import { fade } from "svelte/transition";
-    import { quadInOut } from "svelte/easing";
-
-    let menuShown = false;
     export let buttonText: string;
+    let menuShown = false;
 
-    
-    let menuDiv: HTMLDivElement = null;
-    let dropupButton: HTMLButtonElement = null;
-
-    let dropupLeft = 0;
-
-    const setNewLeft = () => {
-        dropupLeft = (dropupButton) ? dropupButton.getBoundingClientRect().left : 0;
-    };
-
-    function toggleMenu(event: MouseEvent) {
-        event.stopPropagation();
-        setNewLeft();
+    function toggleMenu() {
         menuShown = !menuShown;
     }
-    onMount(() => {
-        setNewLeft();
-        window.addEventListener('resize', setNewLeft);
-        document.addEventListener('click', onClickHandler);
-    });
-    onDestroy(() => {
-        window.removeEventListener('resize', setNewLeft);
-        document.removeEventListener('click', onClickHandler);
-    });
 
-    $: menuDiv && (menuDiv.style.transform = `translateX(${dropupLeft-15}px)`);
-
-    function onClickHandler(e) {
-        if(menuDiv && !menuDiv.contains(e.target as Node) && e.target !== dropupButton)
-        {
-            menuShown = false;
-        }
-    }
-
-    function fadeNSlide(node, options)
-    {
-        const fadeAnim = fade(node, options);
-        return {
-            duration: options.duration,
-            css: fadeAnim.css
-        };
+    function closeMenu() {
+        menuShown = false;
     }
 </script>
 
-<button type="button" bind:this={dropupButton} on:click={toggleMenu} aria-expanded={menuShown}>{buttonText}</button>
-{#if menuShown}
-    <div bind:this={menuDiv} class="drop-up-menu" role="menu" in:fadeNSlide="{{ duration: 100, easing: quadInOut }}" out:fadeNSlide="{{ duration: 100, easing: quadInOut }}">
-        <slot />
-    </div>
-{/if}
+<div class="dropup">
+    <button type="button" aria-expanded={menuShown} on:click={toggleMenu}>{buttonText}</button>
+    {#if menuShown}
+        <div class="drop-up-menu" role="menu" on:click={closeMenu}>
+            <slot />
+        </div>
+    {/if}
+</div>
 
 <style>
+    .dropup {
+        position: relative;
+        min-width: 0;
+    }
+    .dropup > button {
+        width: 100%;
+        height: 100%;
+    }
     .drop-up-menu {
         position: absolute;
-        z-index: 20;
-        pointer-events: auto;
+        z-index: 10001;
+        left: 0;
+        bottom: calc(100% + 5px);
         display: flex;
         flex-direction: column;
-        background-color: var(--secondary-button-emphasized);
-        padding: 2px;
-        bottom: 100%;
-        border-radius: 5px;
+        gap: 3px;
+        min-width: max(100%, 190px);
+        max-width: min(90vw, 320px);
+        padding: 5px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        background: var(--background);
+        box-shadow: 0 8px 28px #0008;
+        pointer-events: auto;
+    }
+    .drop-up-menu :global(button) {
+        width: 100%;
+        text-align: left;
     }
 </style>
