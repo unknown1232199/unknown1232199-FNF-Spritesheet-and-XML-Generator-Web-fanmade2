@@ -6,6 +6,7 @@
     export let settings = {
         padding: 2,
         maxAtlasSize: 0,
+        packerMode: 'maxrects',
         prefixType: 'no-prefix',
         usePrefixOnXMLFrames: false,
         customPrefix: '',
@@ -30,6 +31,17 @@
                 <input type="checkbox" name="clip-to-bb" id="clip-to-bb" bind:checked={settings.clipToBoundingBox} />
                 Clip to Bounding Box
             </label>
+        </fieldset>
+        <fieldset>
+            <legend>Packing engine</legend>
+            <label for="packer-mode">
+                Packing method
+                <select id="packer-mode" bind:value={settings.packerMode}>
+                    <option value="maxrects">MaxRectsPacker (NEW) — choose best layout automatically</option>
+                    <option value="original">Use the original packer</option>
+                </select>
+            </label>
+            <small>MaxRects tests multiple placement strategies and keeps the tightest atlas it finds.</small>
         </fieldset>
         <fieldset>
             <legend>Spritesheet Size</legend>
