@@ -1,0 +1,16 @@
+:root{--background:#11131b;--text-color:#edf0f8;--text-color-2:#242638;--button-disabled-text:#7d8496;--border-color:#303647;--frame-border-color:#6558b8;--secondary-button:#252a39;--secondary-button-emphasized:#51468c;--table-row-selected:#302b4c;--frame-hovered:#a493ff;--frame-selected:#7668d8}
+.light-mode{--background:#f3f4fa;--text-color:#242638;--text-color-2:#242638;--button-disabled-text:#9298a7;--border-color:#dfe1eb;--frame-border-color:#796bd4;--secondary-button-emphasized:#dcd7ff;--secondary-button:#eceaf8;--table-row-selected:#e4e0ff;--frame-hovered:#7769d5;--frame-selected:#a99ff0}
+body{background:var(--background);color:var(--text-color)}button,input,select{font:inherit}button{border:1px solid var(--border-color);border-radius:8px;padding:8px 11px;background:var(--secondary-button);color:var(--text-color);cursor:pointer;transition:border-color .15s,background .15s,transform .15s}button:hover:enabled{border-color:var(--frame-hovered)}button:active:enabled{transform:translateY(1px)}button:disabled{color:var(--button-disabled-text);cursor:not-allowed}
+input[type=text],input[type=number],select{min-width:0;border:1px solid var(--border-color);border-radius:7px;padding:8px 10px;background:var(--background);color:var(--text-color)}input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--frame-hovered);outline-offset:2px}
+dialog{max-width:min(92vw,720px);border:1px solid var(--border-color);border-radius:12px;background:var(--background);color:var(--text-color);box-shadow:0 20px 70px #0008}dialog::backdrop{background:#05060bbd;backdrop-filter:blur(3px)}
+#sprite-frames,#preview-div{border:1px solid var(--border-color)!important;border-radius:10px;background-image:linear-gradient(45deg,#8881 25%,transparent 25%),linear-gradient(-45deg,#8881 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#8881 75%),linear-gradient(-45deg,transparent 75%,#8881 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
+#controls{gap:7px;padding:9px;border:1px solid var(--border-color)!important;border-radius:10px;background:var(--background)}#controls>*{min-width:0}
+@media(max-width:650px){#controls{grid-template-columns:repeat(2,minmax(0,1fr))!important;position:static!important}#sprite-frames,#preview-div{height:48vh!important}}
+
+/* Basic mode keeps the workspace spacious; advanced mode favors denser editing. */
+main.basic-mode #sprite-frames { padding:10px; }
+main.basic-mode #controls { padding:12px; }
+main.advanced-mode #sprite-frames { border-style:dashed!important; }
+main.advanced-mode #controls { grid-template-columns:repeat(auto-fit,minmax(115px,1fr)); }
+main.advanced-mode .frame-container { border-width:2px; }
+#preview-div img { image-rendering:pixelated; }
