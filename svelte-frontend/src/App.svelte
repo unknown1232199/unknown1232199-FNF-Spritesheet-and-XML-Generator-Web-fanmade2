@@ -12,10 +12,10 @@
 	// let test = wasm.greet("Friend!!");
 </script>
 
-<svelte:head><title>Fantake — FNF Spritesheet and XML Generator Web</title><meta name="description" content="Fantake: FNF Spritesheet and XML Generator Web" /></svelte:head>
+<svelte:head><title>FNF Spritesheet and XML Generator Web — Fan Version (Fantake)</title><meta name="description" content="Fantake, an independent fan version of FNF Spritesheet and XML Generator Web." /></svelte:head>
 
 <main>
-	<h1 id="title">FNF Spritesheet and XML Generator Web (experimental version)</h1>
+	<h1 id="title">FNF Spritesheet and XML Generator Web (Fan Version)</h1>
 
 	<label for="dark-mode">
 		<input type="checkbox" name="dark-mode" id="dark-mode" checked on:change={() => { document.body.classList.toggle('light-mode') }}>

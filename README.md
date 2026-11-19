@@ -1,6 +1,6 @@
-# Fantake
+# FNF Spritesheet and XML Generator Web — Fan Version (Fantake)
 
-**Fantake** is a browser-based toolkit for Friday Night Funkin' mod creators. Build character spritesheets, edit XML atlases, preview animations and create icon grids in one workspace.
+**Fantake** is an independent fan version of the original *FNF Spritesheet and XML Generator Web*, continued as a browser-based toolkit for Friday Night Funkin' mod creators. Build character spritesheets, edit XML atlases, preview animations and create icon grids in one workspace.
 
 > This project is an independent fan-made continuation built from the open-source work of [UncertainProd](https://github.com/UncertainProd/FNF-Spritesheet-XML-generator-Web). Original credits and license notices are preserved below.
 
