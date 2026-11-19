@@ -10,13 +10,13 @@
     let isDark = true;
 </script>
 <svelte:head>
-    <title>FNF Studio — Spritesheet & XML Generator</title>
+    <title>Fantake — Spritesheet & XML Generator</title>
     <meta name="description" content="Create and edit Friday Night Funkin' spritesheets, XML atlases and icongrids directly in your browser." />
     <meta name="theme-color" content="#11131b" />
 </svelte:head>
 <main class:advanced-mode={isAdvanced} class:basic-mode={!isAdvanced} class:light-mode={!isDark}>
     <header class="topbar">
-        <a class="brand" href="#top" aria-label="FNF Studio home"><span class="brand-mark">F</span><span class="brand-copy"><strong>FNF STUDIO</strong><small>SPRITESHEET WORKSPACE</small></span></a>
+        <a class="brand" href="#top" aria-label="Fantake home"><span class="brand-mark">F</span><span class="brand-copy"><strong>FANTAKE</strong><small>SPRITESHEET WORKSPACE</small></span></a>
         <div class="top-actions"><span class="mode-label">{isAdvanced ? 'ADVANCED' : 'BASIC'} MODE</span><button class="mode-toggle" type="button" on:click={() => isAdvanced = !isAdvanced} aria-pressed={isAdvanced}>{isAdvanced ? 'Basic mode' : 'Advanced mode'}</button><button class="theme-toggle" type="button" on:click={() => isDark = !isDark} aria-label="Toggle color theme">{isDark ? '☼' : '☾'}</button></div>
     </header>
     <section class="intro" id="top"><div><p class="eyebrow">MODDING TOOLKIT <span>•</span> BROWSER-BASED</p><h1>Spritesheet <em>&</em> XML Generator</h1><p class="intro-copy">Prepare character atlases, organize animation frames and build icongrids — all in one workspace.</p></div><div class="intro-note"><span class="status-dot"></span> Processing locally in your browser</div></section>
@@ -26,7 +26,7 @@
         {#if curChoice == "spsh"}<div class="workspace-heading"><div><span class="section-kicker">01 / ATLAS WORKSPACE</span><h2>Spritesheet editor</h2></div><span class="workspace-tag">PNG + XML</span></div><SpritesheetGenerator charname={characterName} wasm={wasm} />
         {:else if curChoice == "icongrid"}<div class="workspace-heading"><div><span class="section-kicker">02 / ICON WORKSPACE</span><h2>Icongrid builder</h2></div><span class="workspace-tag">PNG</span></div><IcongridGenerator bind:charname={characterName} wasm={wasm} />{/if}
     </section>
-    <footer><span>FNF STUDIO</span><span>Files stay on your device · No upload required</span></footer>
+    <footer><span>FANTAKE</span><span>Files stay on your device · No upload required</span></footer>
 </main>
 <style>
     main { --panel:#191c27; --panel-raised:#202432; --line:#303647; --muted:#9ba4b8; --accent:#9c8cff; --accent-2:#6ed9c2; min-height:100vh; max-width:1500px; margin:0 auto; padding:0 30px 28px; color:#edf0f8; }
