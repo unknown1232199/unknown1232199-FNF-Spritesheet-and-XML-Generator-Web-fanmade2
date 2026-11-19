@@ -59,7 +59,7 @@ fn attempt(items: &[PackingRectangle<u64>], side: u32, heuristic: usize) -> Opti
     let mut placed = Vec::with_capacity(ordered.len());
 
     for item in ordered {
-        let mut best: Option<(usize, (u64, u64, u32, u32), FreeRect)> = None;
+        let mut best: Option<(usize, (u64, u64, u64, u64), FreeRect)> = None;
         for (idx, f) in free.iter().enumerate() {
             if item.width > f.w || item.height > f.h { continue; }
             let dw = f.w - item.width;
@@ -68,10 +68,10 @@ fn attempt(items: &[PackingRectangle<u64>], side: u32, heuristic: usize) -> Opti
             let long = dw.max(dh) as u64;
             let area = (f.w as u64 * f.h as u64) - (item.width as u64 * item.height as u64);
             let score = match heuristic {
-                1 => (area, short, f.y, f.x),
-                2 => (long, short, f.y, f.x),
+                1 => (area, short, f.y as u64, f.x as u64),
+                2 => (long, short, f.y as u64, f.x as u64),
                 3 => (f.y as u64 + item.height as u64, f.x as u64, short, long),
-                _ => (short, long, f.y, f.x),
+                _ => (short, long, f.y as u64, f.x as u64),
             };
             if best.as_ref().map_or(true, |(_, old, _)| score < *old) {
                 best = Some((idx, score, FreeRect { x: f.x, y: f.y, w: item.width, h: item.height }));
