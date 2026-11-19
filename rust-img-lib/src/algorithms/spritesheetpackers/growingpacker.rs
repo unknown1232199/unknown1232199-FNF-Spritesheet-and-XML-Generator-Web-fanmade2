@@ -4,7 +4,7 @@ use wasm_bindgen::prelude::*;
 
 use crate::{utils::{PackError, encode_image_as_png, self, transform_image, pad_image_uniform, PrefixCounter}, algorithms::{PackingRectangle, Packer, FitRect}, textureatlas_format::{self, SubTexture}};
 use image::{imageops, DynamicImage};
-use super::helpers;
+use super::{helpers, maxrects};
 
 // use super::{PackingRectangle, Packer, FitRect, growingpack_fns};
 
@@ -90,6 +90,7 @@ pub struct GrowingPacker
     character_name: String,
     img_padding: u32,
     max_atlas_size: u32,
+    use_max_rects: bool,
     frame_image_cache: ImageCache,
     frames: HashMap<u64, Vec<FrameInfo>>,
     _spritesheet_store: HashMap<String, image::DynamicImage>,
@@ -99,12 +100,13 @@ pub struct GrowingPacker
 #[wasm_bindgen]
 impl GrowingPacker
 {
-    pub fn new(charname: String, padding: u32, max_atlas_size: u32) -> Self
+    pub fn new(charname: String, padding: u32, max_atlas_size: u32, use_max_rects: bool) -> Self
     {
         Self {
             character_name: charname,
             img_padding: padding,
             max_atlas_size,
+            use_max_rects,
             frame_image_cache: ImageCache::new(),
             frames: HashMap::new(),
             _spritesheet_store: HashMap::new(),
@@ -368,6 +370,9 @@ impl Packer for GrowingPacker
                 height: img.height(),
                 id: *imghash
             });
+        }
+        if self.use_max_rects {
+            return maxrects::pack_maxrects(rects, self.max_atlas_size);
         }
         let result = helpers::bin_pack(rects.into_iter(), |im| (im.width*im.height) as i32)?;
         
